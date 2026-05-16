@@ -51,7 +51,8 @@ function Navbar() {
         padding: '0 24px',
       }}>
       <div style={{ maxWidth: 1200, margin: '0 auto', display: 'flex', alignItems: 'center', justifyContent: 'space-between', height: 64 }}>
-        <a href="#hero" style={{ textDecoration: 'none' }}>
+        <a href="#hero" style={{ textDecoration: 'none', display: 'flex', alignItems: 'center', gap: 12 }}>
+          <img src="/EsCruz/morena-logo.svg" alt="Morena" style={{ height: 36, width: 'auto', display: 'block' }} />
           <span style={{ fontFamily: 'var(--font-head)', fontWeight: 900, fontSize: 22, letterSpacing: 1 }}>
             <span style={{ color: '#8E2C2D' }}>Es</span><span style={{ color: '#0A0A0A' }}>Cruz</span>
           </span>
