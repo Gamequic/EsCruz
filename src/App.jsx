@@ -44,25 +44,25 @@ function Navbar() {
       transition={{ duration: 0.5, ease: 'easeOut', delay: 0.2 }}
       style={{
         position: 'fixed', top: 0, left: 0, right: 0, zIndex: 100,
-        background: scrolled ? 'rgba(10,10,10,0.97)' : 'transparent',
-        backdropFilter: scrolled ? 'blur(12px)' : 'none',
-        borderBottom: scrolled ? '1px solid rgba(255,255,255,0.08)' : 'none',
-        transition: 'background 0.3s ease, border-color 0.3s ease',
+        background: '#fff',
+        borderBottom: '1px solid rgba(0,0,0,0.08)',
+        boxShadow: '0 2px 16px rgba(0,0,0,0.07)',
+        transition: 'box-shadow 0.3s ease',
         padding: '0 24px',
       }}>
       <div style={{ maxWidth: 1200, margin: '0 auto', display: 'flex', alignItems: 'center', justifyContent: 'space-between', height: 64 }}>
         <a href="#hero" style={{ textDecoration: 'none' }}>
-          <span style={{ fontFamily: 'var(--font-head)', fontWeight: 900, fontSize: 22, color: '#fff', letterSpacing: 1 }}>
-            ES<span style={{ color: '#C9A227' }}>CRUZ</span>
+          <span style={{ fontFamily: 'var(--font-head)', fontWeight: 900, fontSize: 22, letterSpacing: 1 }}>
+            <span style={{ color: '#8E2C2D' }}>Es</span><span style={{ color: '#0A0A0A' }}>Cruz</span>
           </span>
         </a>
 
         <div style={{ display: 'flex', gap: 32, alignItems: 'center' }} className="nav-links">
           {links.map(l => (
             <a key={l.href} href={l.href}
-              style={{ color: 'rgba(255,255,255,0.85)', textDecoration: 'none', fontFamily: 'var(--font-head)', fontWeight: 600, fontSize: 14, letterSpacing: 1, textTransform: 'uppercase', transition: 'color 0.2s' }}
-              onMouseEnter={e => e.target.style.color = '#C9A227'}
-              onMouseLeave={e => e.target.style.color = 'rgba(255,255,255,0.85)'}>
+              style={{ color: '#3D3D3D', textDecoration: 'none', fontFamily: 'var(--font-head)', fontWeight: 600, fontSize: 14, letterSpacing: 1, textTransform: 'uppercase', transition: 'color 0.2s' }}
+              onMouseEnter={e => e.target.style.color = '#8E2C2D'}
+              onMouseLeave={e => e.target.style.color = '#3D3D3D'}>
               {l.label}
             </a>
           ))}
@@ -76,17 +76,17 @@ function Navbar() {
 
         <button onClick={() => setMenuOpen(v => !v)} className="hamburger-btn"
           style={{ display: 'none', flexDirection: 'column', gap: 5, padding: 8, background: 'none', border: 'none', cursor: 'pointer' }}>
-          {[0, 1, 2].map(i => <span key={i} style={{ width: 24, height: 2, background: '#fff', display: 'block' }} />)}
+          {[0, 1, 2].map(i => <span key={i} style={{ width: 24, height: 2, background: '#0A0A0A', display: 'block' }} />)}
         </button>
       </div>
 
       <AnimatePresence>
         {menuOpen && (
           <motion.div initial={{ opacity: 0, height: 0 }} animate={{ opacity: 1, height: 'auto' }} exit={{ opacity: 0, height: 0 }}
-            style={{ background: 'rgba(10,10,10,0.98)', borderTop: '1px solid rgba(255,255,255,0.08)', overflow: 'hidden' }}>
+            style={{ background: '#fff', borderTop: '1px solid rgba(0,0,0,0.08)', overflow: 'hidden' }}>
             {links.map(l => (
               <a key={l.href} href={l.href} onClick={() => setMenuOpen(false)}
-                style={{ display: 'block', padding: '16px 24px', color: '#fff', textDecoration: 'none', fontFamily: 'var(--font-head)', fontWeight: 600, fontSize: 18, textTransform: 'uppercase', letterSpacing: 1, borderBottom: '1px solid rgba(255,255,255,0.06)' }}>
+                style={{ display: 'block', padding: '16px 24px', color: '#0A0A0A', textDecoration: 'none', fontFamily: 'var(--font-head)', fontWeight: 600, fontSize: 18, textTransform: 'uppercase', letterSpacing: 1, borderBottom: '1px solid rgba(0,0,0,0.06)' }}>
                 {l.label}
               </a>
             ))}
@@ -110,59 +110,76 @@ function Hero() {
     <section id="hero" style={{
       minHeight: '100vh',
       background: 'linear-gradient(165deg, #0A0A0A 0%, #1A1A1A 45%, #0A0A0A 100%)',
-      display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center',
-      textAlign: 'center', padding: '120px 24px 80px', position: 'relative', overflow: 'hidden',
+      display: 'flex', alignItems: 'center',
+      padding: '100px 24px 80px', position: 'relative', overflow: 'hidden',
     }}>
       <div style={{ position: 'absolute', inset: 0, backgroundImage: 'repeating-linear-gradient(90deg, rgba(255,255,255,0.015) 0px, rgba(255,255,255,0.015) 1px, transparent 1px, transparent 80px)', pointerEvents: 'none' }} />
       <motion.div initial={{ scaleX: 0 }} animate={{ scaleX: 1 }} transition={{ duration: 0.8, ease: 'easeOut', delay: 0.3 }}
         style={{ position: 'absolute', top: 0, left: 0, right: 0, height: 4, background: '#8E2C2D', transformOrigin: 'left' }} />
 
-      <div style={{ position: 'relative', maxWidth: 960 }}>
-        <motion.p initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.4, duration: 0.5 }}
-          style={{ fontFamily: 'var(--font-head)', fontWeight: 600, fontSize: 13, letterSpacing: 5, color: '#C9A227', textTransform: 'uppercase', marginBottom: 28 }}>
-          Chihuahua · Gobernador · 2027
-        </motion.p>
+      <div style={{ maxWidth: 1200, margin: '0 auto', width: '100%', display: 'grid', gridTemplateColumns: '1fr 420px', gap: 64, alignItems: 'center' }} className="hero-grid">
+        {/* texto */}
+        <div style={{ position: 'relative' }}>
+          <motion.p initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.4, duration: 0.5 }}
+            style={{ fontFamily: 'var(--font-head)', fontWeight: 600, fontSize: 13, letterSpacing: 5, color: '#C9A227', textTransform: 'uppercase', marginBottom: 28 }}>
+            Chihuahua · Gobernador · 2027
+          </motion.p>
 
-        <motion.h1 initial={{ opacity: 0, y: 50 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.55, duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
-          style={{ fontFamily: 'var(--font-head)', fontWeight: 900, fontSize: 'clamp(60px, 13vw, 120px)', lineHeight: 0.9, color: '#fff', letterSpacing: -2, textTransform: 'uppercase', marginBottom: 12 }}>
-          Cruz Pérez<br />
-          <span style={{ color: '#C9A227' }}>Cuéllar</span>
-        </motion.h1>
+          <motion.h1 initial={{ opacity: 0, y: 50 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.55, duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
+            style={{ fontFamily: 'var(--font-head)', fontWeight: 900, fontSize: 'clamp(52px, 10vw, 100px)', lineHeight: 0.9, color: '#fff', letterSpacing: -2, textTransform: 'uppercase', marginBottom: 12 }}>
+            Cruz Pérez<br />
+            <span style={{ color: '#C9A227' }}>Cuéllar</span>
+          </motion.h1>
 
-        <motion.p initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.75, duration: 0.6 }}
-          style={{ fontFamily: 'var(--font-head)', fontWeight: 600, fontSize: 'clamp(14px, 3vw, 22px)', letterSpacing: 4, color: 'rgba(255,255,255,0.55)', textTransform: 'uppercase', marginBottom: 64 }}>
-          El político que recorre Chihuahua, no que lo administra desde un escritorio
-        </motion.p>
+          <motion.p initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.75, duration: 0.6 }}
+            style={{ fontFamily: 'var(--font-head)', fontWeight: 600, fontSize: 'clamp(13px, 2vw, 18px)', letterSpacing: 3, color: 'rgba(255,255,255,0.55)', textTransform: 'uppercase', marginBottom: 52 }}>
+            El político que recorre Chihuahua, no que lo administra desde un escritorio
+          </motion.p>
 
-        {/* stats */}
-        <motion.div initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.9, duration: 0.6 }}
-          style={{ display: 'flex', justifyContent: 'center', gap: 0, flexWrap: 'wrap', borderTop: '1px solid rgba(255,255,255,0.1)', borderBottom: '1px solid rgba(255,255,255,0.1)', padding: '32px 0', marginBottom: 56 }}>
-          {[
-            { num: '354K', label: 'VOTOS EN JUÁREZ 2024', sub: 'El más votado en la historia de la ciudad' },
-            { num: '67%', label: 'APROBACIÓN COMO ALCALDE', sub: 'Abril 2026 — Demoscopia Digital' },
-            { num: '30+', label: 'AÑOS EN CHIHUAHUA', sub: 'Político de territorio, no de escritorio' },
-          ].map((s, i) => (
-            <div key={i} style={{
-              flex: '1 1 180px', padding: '0 32px', textAlign: 'center',
-              borderRight: i < 2 ? '1px solid rgba(255,255,255,0.1)' : 'none',
-            }}>
-              <div style={{ fontFamily: 'var(--font-head)', fontWeight: 900, fontSize: 'clamp(36px, 7vw, 54px)', color: '#C9A227', lineHeight: 1 }}>{s.num}</div>
-              <div style={{ fontFamily: 'var(--font-head)', fontWeight: 700, fontSize: 10, letterSpacing: 2, color: 'rgba(255,255,255,0.85)', textTransform: 'uppercase', marginTop: 8 }}>{s.label}</div>
-              <div style={{ fontFamily: 'var(--font-body)', fontSize: 11, color: 'rgba(255,255,255,0.38)', marginTop: 4 }}>{s.sub}</div>
-            </div>
-          ))}
-        </motion.div>
+          {/* stats */}
+          <motion.div initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.9, duration: 0.6 }}
+            style={{ display: 'flex', gap: 0, flexWrap: 'wrap', borderTop: '1px solid rgba(255,255,255,0.1)', borderBottom: '1px solid rgba(255,255,255,0.1)', padding: '28px 0', marginBottom: 48 }}>
+            {[
+              { num: '354K', label: 'VOTOS EN JUÁREZ 2024', sub: 'El más votado en la historia de la ciudad' },
+              { num: '67%', label: 'APROBACIÓN COMO ALCALDE', sub: 'Abril 2026 — Demoscopia Digital' },
+              { num: '30+', label: 'AÑOS EN CHIHUAHUA', sub: 'Político de territorio, no de escritorio' },
+            ].map((s, i) => (
+              <div key={i} style={{
+                flex: '1 1 140px', padding: '0 24px', textAlign: 'center',
+                borderRight: i < 2 ? '1px solid rgba(255,255,255,0.1)' : 'none',
+              }}>
+                <div style={{ fontFamily: 'var(--font-head)', fontWeight: 900, fontSize: 'clamp(30px, 5vw, 46px)', color: '#C9A227', lineHeight: 1 }}>{s.num}</div>
+                <div style={{ fontFamily: 'var(--font-head)', fontWeight: 700, fontSize: 10, letterSpacing: 2, color: 'rgba(255,255,255,0.85)', textTransform: 'uppercase', marginTop: 8 }}>{s.label}</div>
+                <div style={{ fontFamily: 'var(--font-body)', fontSize: 11, color: 'rgba(255,255,255,0.38)', marginTop: 4 }}>{s.sub}</div>
+              </div>
+            ))}
+          </motion.div>
 
-        <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 1.1 }}
-          style={{ display: 'flex', gap: 16, justifyContent: 'center', flexWrap: 'wrap' }}>
-          <a href="#logros"
-            style={{ background: '#8E2C2D', color: '#fff', padding: '15px 40px', fontFamily: 'var(--font-head)', fontWeight: 700, fontSize: 15, letterSpacing: 2, textTransform: 'uppercase', textDecoration: 'none', borderRadius: 3 }}>
-            Ver logros
-          </a>
-          <a href="#unete"
-            style={{ background: 'transparent', color: '#fff', padding: '15px 40px', fontFamily: 'var(--font-head)', fontWeight: 700, fontSize: 15, letterSpacing: 2, textTransform: 'uppercase', textDecoration: 'none', borderRadius: 3, border: '2px solid rgba(255,255,255,0.25)' }}>
-            Únete
-          </a>
+          <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 1.1 }}
+            style={{ display: 'flex', gap: 16, flexWrap: 'wrap' }}>
+            <a href="#logros"
+              style={{ background: '#8E2C2D', color: '#fff', padding: '15px 40px', fontFamily: 'var(--font-head)', fontWeight: 700, fontSize: 15, letterSpacing: 2, textTransform: 'uppercase', textDecoration: 'none', borderRadius: 3 }}>
+              Ver logros
+            </a>
+            <a href="#unete"
+              style={{ background: 'transparent', color: '#fff', padding: '15px 40px', fontFamily: 'var(--font-head)', fontWeight: 700, fontSize: 15, letterSpacing: 2, textTransform: 'uppercase', textDecoration: 'none', borderRadius: 3, border: '2px solid rgba(255,255,255,0.25)' }}>
+              Únete
+            </a>
+          </motion.div>
+        </div>
+
+        {/* foto retrato */}
+        <motion.div
+          initial={{ opacity: 0, x: 60 }} animate={{ opacity: 1, x: 0 }}
+          transition={{ delay: 0.5, duration: 0.9, ease: [0.22, 1, 0.36, 1] }}
+          style={{ position: 'relative', alignSelf: 'flex-end' }}>
+          <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(to top, #0A0A0A 0%, transparent 40%)', zIndex: 1, pointerEvents: 'none' }} />
+          <div style={{ position: 'absolute', left: -2, top: 0, bottom: 0, width: 3, background: '#8E2C2D', zIndex: 2 }} />
+          <img
+            src="/EsCruz/foto1.png"
+            alt="Cruz Pérez Cuéllar"
+            style={{ width: '100%', maxHeight: '80vh', objectFit: 'cover', objectPosition: 'top center', display: 'block', filter: 'grayscale(15%)' }}
+          />
         </motion.div>
       </div>
 
@@ -171,6 +188,13 @@ function Hero() {
         <motion.div animate={{ y: [0, 10, 0] }} transition={{ repeat: Infinity, duration: 1.6, ease: 'easeInOut' }}
           style={{ width: 1, height: 40, background: 'linear-gradient(to bottom, rgba(201,162,39,0.8), transparent)' }} />
       </motion.div>
+
+      <style>{`
+        @media (max-width: 900px) {
+          .hero-grid { grid-template-columns: 1fr !important; gap: 40px !important; }
+          .hero-grid > div:last-child { max-height: 50vh; overflow: hidden; }
+        }
+      `}</style>
     </section>
   )
 }
@@ -361,6 +385,38 @@ function Trayectoria() {
   )
 }
 
+/* ── GALERÍA ── */
+function Galeria() {
+  return (
+    <section style={{ background: '#0A0A0A', padding: '80px 24px' }}>
+      <div style={{ maxWidth: 1100, margin: '0 auto' }}>
+        <motion.div initial="hidden" whileInView="show" viewport={{ once: true, margin: '-60px' }} variants={stagger()}>
+          <motion.p variants={fadeUp} style={{ fontFamily: 'var(--font-head)', fontWeight: 700, fontSize: 12, letterSpacing: 4, color: '#8E2C2D', textTransform: 'uppercase', marginBottom: 48, textAlign: 'center' }}>
+            En el territorio
+          </motion.p>
+        </motion.div>
+        <motion.div initial="hidden" whileInView="show" viewport={{ once: true, margin: '-40px' }} variants={stagger(0.1)}
+          style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 3 }} className="galeria-grid">
+          {['/EsCruz/foto2.png', '/EsCruz/foto3.png'].map((src, i) => (
+            <motion.div key={i} variants={fadeUp}
+              whileHover={{ scale: 1.02 }}
+              transition={{ duration: 0.3 }}
+              style={{ overflow: 'hidden', position: 'relative', aspectRatio: '761/643' }}>
+              <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(to top, rgba(142,44,45,0.4) 0%, transparent 50%)', zIndex: 1, pointerEvents: 'none' }} />
+              <img src={src} alt="" style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block', filter: 'grayscale(10%)' }} />
+            </motion.div>
+          ))}
+        </motion.div>
+      </div>
+      <style>{`
+        @media (max-width: 640px) {
+          .galeria-grid { grid-template-columns: 1fr !important; }
+        }
+      `}</style>
+    </section>
+  )
+}
+
 /* ── VOTO INDECISO ── */
 function VotoIndeciso() {
   return (
@@ -440,7 +496,7 @@ function Unete() {
 
       <motion.div initial={{ opacity: 0 }} whileInView={{ opacity: 1 }} viewport={{ once: true }}
         style={{ maxWidth: 1100, margin: '80px auto 0', borderTop: '1px solid rgba(255,255,255,0.07)', paddingTop: 32, display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: 16 }}>
-        <span style={{ fontFamily: 'var(--font-head)', fontWeight: 900, fontSize: 18, color: '#fff' }}>ES<span style={{ color: '#C9A227' }}>CRUZ</span></span>
+        <span style={{ fontFamily: 'var(--font-head)', fontWeight: 900, fontSize: 18 }}><span style={{ color: '#8E2C2D' }}>Es</span><span style={{ color: '#0A0A0A' }}>Cruz</span></span>
         <span style={{ fontFamily: 'var(--font-body)', fontSize: 13, color: 'rgba(255,255,255,0.25)' }}>Cruz Pérez Cuéllar · Gobernador de Chihuahua 2027 · Material de precampaña</span>
       </motion.div>
     </section>
@@ -457,6 +513,7 @@ export default function App() {
       <Propuesta />
       <ChihuahuaConMexico />
       <Trayectoria />
+      <Galeria />
       <VotoIndeciso />
       <Unete />
     </>
